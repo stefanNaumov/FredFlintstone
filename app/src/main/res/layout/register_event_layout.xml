@@ -46,9 +46,16 @@
         android:id="@+id/eventDateTimeInput"/>
 
     <Button
-        android:layout_width="206dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/captureEvent"
         android:id="@+id/capturePlaceBtn"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createEvent"
+        android:id="@+id/registerEventBtn"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

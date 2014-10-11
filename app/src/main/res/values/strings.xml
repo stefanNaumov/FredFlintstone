@@ -20,4 +20,5 @@
     <string name="city">Event City</string>
     <string name="date">Event Date</string>
     <string name="captureEvent">Capture Event Place</string>
+    <string name="createEvent">Create Event</string>
 </resources>

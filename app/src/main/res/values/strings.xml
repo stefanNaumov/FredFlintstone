@@ -4,5 +4,20 @@
     <string name="app_name">SportsEventsOrganizer</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="login_btn">Login</string>
+    <string name="register">Register</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="viewEvents">ViewEvents</string>
+    <string name="makeEvent">MakeEvent</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="eventDataSeparator">Event Data</string>
+    <string name="title">Event Title</string>
+    <string name="sportType">Sport Type</string>
+    <string name="content">Event Content</string>
+    <string name="city">Event City</string>
+    <string name="date">Event Date</string>
+    <string name="captureEvent">Capture Event Place</string>
 </resources>

@@ -20,5 +20,6 @@ android {
 }
 
 dependencies {
+    compile files('libs/AndroidSDK.jar')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

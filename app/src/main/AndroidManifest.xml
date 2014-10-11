@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="activities.ViewEventsActivity"></activity>
+        <activity android:name="activities.RegisterEventActivity"></activity>
     </application>
 
 </manifest>

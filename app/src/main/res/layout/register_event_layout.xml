@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Username"
+        android:id="@+id/userNameInput"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/phoneNumber"
+        android:id="@+id/userPhoneInput"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="@string/eventDataSeparator"
+        android:id="@+id/eventDataTextView"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/title"
+        android:id="@+id/eventTitleInput"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/sportType"
+        android:id="@+id/eventSportTypeInput"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/content"
+        android:id="@+id/eventContentInput"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/city"
+        android:id="@+id/eventCityInput"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="@string/date"
+        android:id="@+id/eventDateTimeInput"/>
+
+    <Button
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:text="@string/captureEvent"
+        android:id="@+id/capturePlaceBtn"/>
+
+</LinearLayout>

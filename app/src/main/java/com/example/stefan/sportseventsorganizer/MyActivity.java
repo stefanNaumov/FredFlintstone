@@ -1,17 +1,30 @@
 package com.example.stefan.sportseventsorganizer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import activities.RegisterEventActivity;
+import activities.ViewEventsActivity;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends Activity implements View.OnClickListener{
 
+    Button viewEventsBtn, regEventBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(R.layout.activity_main);
+
+        viewEventsBtn = (Button)findViewById(R.id.viewEvents_btn);
+        regEventBtn = (Button)findViewById(R.id.makeEvent_btn);
+
+        viewEventsBtn.setOnClickListener(this);
+        regEventBtn.setOnClickListener(this);
     }
 
 
@@ -32,5 +45,18 @@ public class MyActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view.getId() == viewEventsBtn.getId()){
+            Intent i = new Intent(this, ViewEventsActivity.class);
+            startActivity(i);
+        }
+        else if (view.getId() == regEventBtn.getId()){
+            Intent i = new Intent(this, RegisterEventActivity.class);
+            startActivity(i);
+        }
     }
 }

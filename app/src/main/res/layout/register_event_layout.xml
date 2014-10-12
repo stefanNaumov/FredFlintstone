@@ -16,7 +16,7 @@
         android:id="@+id/userPhoneInput"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:text="@string/eventDataSeparator"
         android:id="@+id/eventDataTextView"/>
     <EditText
@@ -39,11 +39,24 @@
         android:layout_height="55dp"
         android:text="@string/city"
         android:id="@+id/eventCityInput"/>
-    <EditText
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:text="@string/date"
-        android:id="@+id/eventDateTimeInput"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:text="@string/date"
+            android:id="@+id/eventDatePickBtn"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="end"
+            android:id="@+id/eventDateCalendarView"/>
+
+        </LinearLayout>
+
 
     <Button
         android:layout_width="200dp"

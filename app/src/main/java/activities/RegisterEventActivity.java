@@ -6,13 +6,19 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +35,7 @@ import com.telerik.everlive.sdk.core.EverliveAppSettings;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 
+import java.net.URI;
 import java.security.Provider;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -66,7 +73,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
             eventCity;
     String eventLongitude, eventLatitude;
     Date eventDate;
-    Image eventImg;
+    Bitmap eventImg;
 
     String name;
     String phone;
@@ -116,8 +123,10 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
         if (view.getId() == cameraStartBtn.getId()){
             Intent i = new Intent("android.media.action.IMAGE_CAPTURE");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(i,1);
+            }
 
-            startActivityForResult(i,0);
         }
         else if (view.getId() == eventDateBtn.getId()){
             DialogFragment newFragment = new DatePickerFragment();
@@ -137,10 +146,10 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
                     event.setLongitude(eventLongitude);
                     event.setLatitude(eventLatitude);
                     event.setDate(eventDate);
-
+                    event.setImage(eventImg);
                     EverliveApp app = new EverliveApp("Se1uyHp5A8LQJMr6");
 
-                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG);
+                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
                     app.workWith().data(Event.class).create(event).executeAsync();
                     Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
                 }
@@ -149,6 +158,33 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK){
+            Uri selectedImageUri  = data.getData();
+            //String imgPath = getRealPathFromURI(selectedImageUri);
+
+           // Toast.makeText(this, imgPath, Toast.LENGTH_SHORT).show();
+            //Drawable drawable = Drawable.createFromPath(imgPath);
+            //eventImg   = ((BitmapDrawable) drawable).getBitmap();
+
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
 
     public Location getLastKnownLocation() {
         List<String> providers = locationManager.getProviders(false);

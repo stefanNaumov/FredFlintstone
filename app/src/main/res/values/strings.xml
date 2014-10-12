@@ -10,8 +10,8 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="viewEvents">ViewEvents</string>
-    <string name="makeEvent">MakeEvent</string>
+    <string name="viewEvents">View Events</string>
+    <string name="makeEvent">Make New Event</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="eventDataSeparator">Event Data</string>
     <string name="title">Event Title</string>

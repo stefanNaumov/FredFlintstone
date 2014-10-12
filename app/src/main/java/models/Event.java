@@ -1,5 +1,6 @@
 package models;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import com.telerik.everlive.sdk.core.model.base.DataItem;
@@ -20,8 +21,8 @@ public class Event extends DataItem {
     private String content;
     @ServerProperty("Date")
     private Date date;
-    //@ServerIgnore
-    //private Image image;
+    @ServerIgnore
+    private Bitmap image;
     @ServerProperty("Latitude")
     private String latitude;
     @ServerProperty("Longitude")
@@ -51,9 +52,9 @@ public class Event extends DataItem {
         return this.date;
     }
 
-    //public Image getImage(){
-        // this.image;
-    //}
+    public Bitmap getImage(){
+        return this.image;
+    }
 
     public String getLatitude(){
         return this.latitude;
@@ -91,9 +92,9 @@ public class Event extends DataItem {
         this.date = date;
     }
 
-    //public void setImage(Image image){
-       // this.image = image;
-    //}
+    public void setImage(Bitmap image){
+       this.image = image;
+    }
 
     public void setLatitude(String latitude){
         this.latitude = latitude;

@@ -3,22 +3,36 @@ package models;
 import android.media.Image;
 
 import com.telerik.everlive.sdk.core.model.base.DataItem;
+import com.telerik.everlive.sdk.core.serialization.ServerIgnore;
+import com.telerik.everlive.sdk.core.serialization.ServerProperty;
+import com.telerik.everlive.sdk.core.serialization.ServerType;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by Stefan on 10/11/2014.
  */
+@ServerType("Event")
 public class Event extends DataItem {
+    @ServerProperty("City")
     private String city;
+    @ServerProperty("Content")
     private String content;
+    @ServerProperty("Date")
     private Date date;
-    private Image image;
+    //@ServerIgnore
+    //private Image image;
+    @ServerProperty("Latitude")
     private String latitude;
+    @ServerProperty("Longitude")
     private String longitude;
+    @ServerProperty("OrganizerName")
     private String organizerName;
+    @ServerProperty("OrganizerPhone")
     private String organizerPhone;
+    @ServerProperty("Title")
     private String title;
+    @ServerProperty("SportType")
     private String sportType;
 
     public String getCity(){
@@ -37,9 +51,9 @@ public class Event extends DataItem {
         return this.date;
     }
 
-    public Image getImage(){
-        return this.image;
-    }
+    //public Image getImage(){
+        // this.image;
+    //}
 
     public String getLatitude(){
         return this.latitude;
@@ -77,9 +91,9 @@ public class Event extends DataItem {
         this.date = date;
     }
 
-    public void setImage(Image image){
-        this.image = image;
-    }
+    //public void setImage(Image image){
+       // this.image = image;
+    //}
 
     public void setLatitude(String latitude){
         this.latitude = latitude;

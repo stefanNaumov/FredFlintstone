@@ -22,12 +22,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stefan.sportseventsorganizer.R;
+import com.telerik.everlive.sdk.core.DateTimeUnspecifiedHandling;
+import com.telerik.everlive.sdk.core.DateTimeValuesProcessing;
 import com.telerik.everlive.sdk.core.EverliveApp;
+import com.telerik.everlive.sdk.core.EverliveAppSettings;
+import com.telerik.everlive.sdk.core.result.RequestResult;
+import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 
 import java.security.Provider;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import models.Event;
 import models.Everlive;
@@ -35,7 +45,7 @@ import models.Everlive;
 /**
  * Created by Stefan on 10/11/2014.
  */
-//TODO: add DatePicker DatePicker validation
+
     //add creation of Everlive event object
     //add adding object to everlive database
 public class RegisterEventActivity extends Activity implements View.OnClickListener,
@@ -45,7 +55,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     protected LocationListener locationListener;
     String provider;
     Location currLocation;
-    EverliveApp app;
+    //EverliveApp app;
 
     Button cameraStartBtn;
     Button registerEventBtn;
@@ -73,7 +83,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.register_event_layout);
 
         event = new Event();
-        app = Everlive.getEverliveObj();
+        //app = Everlive.getEverliveObj();
         isLocationFound = false;
         calendarView = (TextView)findViewById(R.id.eventDateCalendarView);
 
@@ -84,19 +94,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         eventContent = (EditText)findViewById(R.id.eventContentInput);
         eventCity = (EditText)findViewById(R.id.eventCityInput);
 
-        //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        provider = locationManager.getBestProvider(criteria, false);
-        currLocation = getLastKnownLocation();
-        if (currLocation != null) {
-            eventLongitude = String.valueOf(currLocation.getLongitude());
-            eventLatitude = String.valueOf(currLocation.getLatitude());
-            isLocationFound = true;
-        }
-
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         cameraStartBtn = (Button)findViewById(R.id.capturePlaceBtn);
         registerEventBtn = (Button)findViewById(R.id.registerEventBtn);
@@ -108,6 +106,12 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1000, this);
+    }
+
+    @Override
     public void onClick(View view) {
 
         if (view.getId() == cameraStartBtn.getId()){
@@ -115,33 +119,39 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
             startActivityForResult(i,0);
         }
-        else if (view.getId() == registerEventBtn.getId()){
-            boolean areFieldsValid = inputValidator();
-
-            if (areFieldsValid && isLocationFound){
-                //TODO implement creating Everlive object
-                //and add to DB
-            }
-        }
         else if (view.getId() == eventDateBtn.getId()){
             DialogFragment newFragment = new DatePickerFragment();
             newFragment.show(getFragmentManager(), "datePicker");
         }
+        else {
+            if (view.getId() == registerEventBtn.getId()) {
+                boolean areFieldsValid = inputValidator();
+
+                if (areFieldsValid && isLocationFound) {
+                    event.setOrganizerName(name);
+                    event.setOrganizerPhone(phone);
+                    event.setTitle(title);
+                    event.setSportType(sportType);
+                    event.setContent(content);
+                    event.setCity(city);
+                    event.setLongitude(eventLongitude);
+                    event.setLatitude(eventLatitude);
+                    event.setDate(eventDate);
+
+                    EverliveApp app = new EverliveApp("Se1uyHp5A8LQJMr6");
+
+                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG);
+                    app.workWith().data(Event.class).create(event).executeAsync();
+                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
     }
 
-    private void addEventToDb(){
-        event.setOrganizerName(name);
-        event.setOrganizerPhone(phone);
-        event.setTitle(title);
-        event.setSportType(sportType);
-        event.setContent(content);
-        event.setCity(city);
-        event.setLongitude(eventLongitude);
-        event.setLatitude(eventLatitude);
-    }
 
-    private Location getLastKnownLocation() {
-        List<String> providers = locationManager.getProviders(true);
+    public Location getLastKnownLocation() {
+        List<String> providers = locationManager.getProviders(false);
         Location bestLocation = null;
         for (String provider : providers) {
             Location l = locationManager.getLastKnownLocation(provider);
@@ -169,6 +179,17 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         sportType = eventSportType.getText().toString().trim();
         content = eventContent.getText().toString().trim();
         city = eventCity.getText().toString().trim();
+
+        DateFormat formatter ;
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            eventDate = (Date)formatter.parse(calendarView.getText().toString());
+            Log.d("DATE",eventDate.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+
 
         if (name == null || name.isEmpty() || name == "" || name.matches("Username")){
 
@@ -207,28 +228,51 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     public void onLocationChanged(Location location) {
 
         if (location != null){
+
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+            currLocation = getLastKnownLocation();
             eventLongitude = String.valueOf(currLocation.getLongitude());
             eventLatitude = String.valueOf(currLocation.getLatitude());
+            isLocationFound = true;
         }
 
     }
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
+        String status = "";
 
+        switch (i) {
+            case android.location.LocationProvider.AVAILABLE:
+                status = "avaliable";
+                break;
+            case android.location.LocationProvider.TEMPORARILY_UNAVAILABLE:
+                status = "temporary unavaliable";
+                break;
+            case android.location.LocationProvider.OUT_OF_SERVICE:
+                status = "out of service";
+                break;
+            default:
+                break;
+        }
+
+        Toast.makeText(getBaseContext(), s + "status: " + status, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProviderEnabled(String s) {
-
+        Toast.makeText(getBaseContext(),
+                "Provider " + "enabled",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProviderDisabled(String s) {
-
+        Toast.makeText(getBaseContext(),
+                "Provider " + "disabled",Toast.LENGTH_LONG).show();
     }
 
-    private static class DatePickerFragment extends DialogFragment
+    public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
         public EditText editText;
@@ -245,8 +289,8 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
 
-            calendarView .setText(String.valueOf(day) + "/"
-                    + String.valueOf(month + 1) + "/" + String.valueOf(year));
+            calendarView .setText(String.valueOf(day) + "-"
+                    + String.valueOf(month + 1) + "-" + String.valueOf(year));
         }
     }
 }

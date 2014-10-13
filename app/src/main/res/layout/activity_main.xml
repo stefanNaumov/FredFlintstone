@@ -13,13 +13,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/viewEvents"
-        android:layout_marginTop="20dp"/>"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_shape"
+        android:shadowColor="#6634A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#FFB34F"
+        android:textSize="30sp"
+        android:alpha="0.70"/>"
 	<Button
 	        android:id="@+id/makeEvent_btn"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/makeEvent"
-	        android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_shape"
+            android:shadowColor="#6634A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:textColor="#FFB34F"
+            android:textSize="30sp"
+            android:alpha="0.70"/>
 
 
 </LinearLayout>

@@ -62,7 +62,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     protected LocationListener locationListener;
     String provider;
     Location currLocation;
-    //EverliveApp app;
+    EverliveApp app;
 
     Button cameraStartBtn;
     Button registerEventBtn;
@@ -90,7 +90,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.register_event_layout);
 
         event = new Event();
-        //app = Everlive.getEverliveObj();
+        app = Everlive.getEverliveObj();
         isLocationFound = false;
         calendarView = (TextView)findViewById(R.id.eventDateCalendarView);
 
@@ -147,7 +147,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
                     event.setLatitude(eventLatitude);
                     event.setDate(eventDate);
                     event.setImage(eventImg);
-                    EverliveApp app = new EverliveApp("Se1uyHp5A8LQJMr6");
+                    //EverliveApp app = new EverliveApp("Se1uyHp5A8LQJMr6");
 
                     Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
                     app.workWith().data(Event.class).create(event).executeAsync();
@@ -217,15 +217,6 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         city = eventCity.getText().toString().trim();
 
         DateFormat formatter ;
-        formatter = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            eventDate = (Date)formatter.parse(calendarView.getText().toString());
-            Log.d("DATE",eventDate.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-
 
         if (name == null || name.isEmpty() || name == "" || name.matches("Username")){
 
@@ -255,6 +246,14 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         if (city == null || city.isEmpty() || city == "" || city.matches("Event City")){
 
             Toast.makeText(RegisterEventActivity.this,"Enter valid city", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            eventDate = (Date)formatter.parse(calendarView.getText().toString());
+            Log.d("DATE",eventDate.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

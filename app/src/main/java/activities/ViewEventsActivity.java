@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.provider.ContactsContract.PhoneLookup;
+import android.database.Cursor;
+import android.net.Uri;
 
 import com.example.stefan.sportseventsorganizer.R;
 import com.telerik.everlive.sdk.core.EverliveApp;
@@ -58,6 +61,26 @@ public class ViewEventsActivity extends Activity {
             //result = app.workWith().data(Event.class).getCount().executeSync();
             //Log.i("App_name", "retrieved count: " + event.getTitle());
        //}
+    }
+
+    // return contact Display_Name if phone number passed as string already exist in database
+    public String contactNameIfExists(Activity _activity, String number) {
+        if (number != null) {
+            Uri lookupUri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+            String[] mPhoneNumberProjection = { PhoneLookup._ID, PhoneLookup.NUMBER, PhoneLookup.DISPLAY_NAME };
+            Cursor cur = _activity.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
+            try {
+                if (cur.moveToFirst()) {
+                    return cur.getString(cur.getColumnIndex(PhoneLookup.DISPLAY_NAME));
+                }
+            } finally {
+                if (cur != null)
+                    cur.close();
+            }
+            return number;
+        } else {
+            return null;
+        }
     }
 
 

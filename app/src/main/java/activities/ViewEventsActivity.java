@@ -8,6 +8,10 @@ import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
 import android.net.Uri;
+import android.widget.ImageView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.InputStream;
 
 import com.example.stefan.sportseventsorganizer.R;
 import com.telerik.everlive.sdk.core.EverliveApp;
@@ -81,6 +85,51 @@ public class ViewEventsActivity extends Activity {
             return null;
         }
     }
+
+    // Download image from Google Maps
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String lat = "48.858235";
+        String lng = "2.294571";
+        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+                .execute(mapUrl);
+        return;
+    }
+
+    //public void onClick(View v) {
+    //    startActivity(new Intent(this, IndexActivity.class));
+    //    finish();
+    //}
+
+    class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    ImageView bmImage;
+
+    public DownloadImageTask(ImageView bmImage) {
+        this.bmImage = bmImage;
+    }
+
+    protected Bitmap doInBackground(String... urls) {
+        String urldisplay = urls[0];
+        Bitmap mIcon11 = null;
+        try {
+            InputStream in = new java.net.URL(urldisplay).openStream();
+            mIcon11 = BitmapFactory.decodeStream(in);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+        return mIcon11;
+    }
+
+    protected void onPostExecute(Bitmap result) {
+        bmImage.setImageBitmap(result);
+    }
+}
+
 
 
 }

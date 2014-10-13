@@ -1,75 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="Username"
-        android:id="@+id/userNameInput"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="@string/phoneNumber"
-        android:id="@+id/userPhoneInput"/>
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:text="@string/eventDataSeparator"
-        android:id="@+id/eventDataTextView"
-        android:gravity="center"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="@string/title"
-        android:id="@+id/eventTitleInput"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="@string/sportType"
-        android:id="@+id/eventSportTypeInput"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="@string/content"
-        android:id="@+id/eventContentInput"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:text="@string/city"
-        android:id="@+id/eventCityInput"/>
+    android:background="@drawable/football_field">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="fill_parent"
-            android:text="@string/date"
-            android:id="@+id/eventDatePickBtn"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Username"
+            android:id="@+id/userNameInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/phoneNumber"
+            android:id="@+id/userPhoneInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:gravity="end"
-            android:id="@+id/eventDateCalendarView"/>
+            android:layout_height="40dp"
+            android:text="@string/eventDataSeparator"
+            android:id="@+id/eventDataTextView"
+            android:gravity="center"
+            android:textColor="#FFB34F"
+            android:textSize="18sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/title"
+            android:id="@+id/eventTitleInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/sportType"
+            android:id="@+id/eventSportTypeInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/content"
+            android:id="@+id/eventContentInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/city"
+            android:id="@+id/eventCityInput"
+            android:textColor="#1014A1"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:text="@string/date"
+                android:id="@+id/eventDatePickBtn"
+                android:background="@drawable/button_shape"
+                android:shadowColor="#6634A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:textColor="#FFB34F"
+                android:textSize="20sp"
+                android:alpha="0.70"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:id="@+id/eventDateCalendarView"
+                android:textColor="#FFB34F"/>
 
         </LinearLayout>
 
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/captureEvent"
-        android:id="@+id/capturePlaceBtn"/>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/captureEvent"
+            android:id="@+id/capturePlaceBtn"
+            android:background="@drawable/button_shape"
+            android:shadowColor="#6634A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:textColor="#FFB34F"
+            android:textSize="20sp"
+            android:alpha="0.70"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/createEvent"
-        android:id="@+id/registerEventBtn"
-        android:layout_gravity="center_horizontal" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/createEvent"
+            android:id="@+id/registerEventBtn"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_shape"
+            android:shadowColor="#6634A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:textColor="#FFB34F"
+            android:textSize="30sp"
+            android:alpha="0.70"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

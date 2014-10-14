@@ -17,9 +17,11 @@ import java.io.InputStream;
 import com.example.stefan.sportseventsorganizer.R;
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
+import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import models.Event;
 import models.EventsListAdapter;
@@ -36,7 +38,7 @@ public class ViewEventsActivity extends Activity {
     RequestResult<ArrayList<Event>> requestResult;
     GridView eventsGrid;
     EventsListAdapter adapter;
-    Event[] events;
+    ArrayList<Event> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,45 +48,23 @@ public class ViewEventsActivity extends Activity {
         app = Everlive.getEverliveObj();
         eventsGrid = (GridView)findViewById(R.id.grid_events);
 
-       // requestResult = app.workWith().data(Event.class).getAll().executeSync();
+        app.workWith().data(Event.class).get().executeAsync(new RequestResultCallbackAction<ArrayList<Event>>() {
+           @Override
+           public void invoke(final RequestResult<ArrayList<Event>> requestResult) {
 
-        Event ev = new Event();
-        ev.setTitle("Gosho");
-        Event[] evs = new Event[1];
-        evs[0] = ev;
-        adapter = new EventsListAdapter(this,evs);
-        eventsGrid.setAdapter(adapter);
-
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                RequestResult res = app.workWith().data(Event.class)
-//                        .getById("869c95b0-52b3-11e4-ade6-217b597a0541").executeSync();
-//                Event ev;
-//                events = new Event[1];
-//                if (res.getSuccess()){
-//                    ev = (Event)res.getValue();
-//                    events[0] = ev;
-//
-//                }
-//                else{
-//                    System.out.println(res.getError().toString());
-//                }
-//
-//                Log.d("NAME", events[0].getTitle());
-//
-//            }
-//        }).start();
-
-
-
-
-        //for (Event event : requestResult.getValue()) {
-            //result = app.workWith().data(Event.class).getCount().executeSync();
-            //Log.i("App_name", "retrieved count: " + event.getTitle());
-       //}
-    }
+               if (requestResult.getSuccess()){
+                    events = requestResult.getValue();
+                    adapter = new EventsListAdapter(ViewEventsActivity.this,events);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            eventsGrid.setAdapter(adapter);
+                        }
+                    });
+               }
+           }
+       });
+ }
 
     // return contact Display_Name if phone number passed as string already exist in database
     public String contactNameIfExists(Activity _activity, String number) {
@@ -108,17 +88,17 @@ public class ViewEventsActivity extends Activity {
 
     // Download image from Google Maps
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        String lat = "48.858235";
-//        String lng = "2.294571";
-//        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
-//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-//                .execute(mapUrl);
-//        return;
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String lat = "48.858235";
+        String lng = "2.294571";
+        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+                .execute(mapUrl);
+        return;
+    }
 
     //public void onClick(View v) {
     //    startActivity(new Intent(this, IndexActivity.class));

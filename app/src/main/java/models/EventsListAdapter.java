@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.stefan.sportseventsorganizer.R;
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 public class EventsListAdapter extends BaseAdapter{
 
     private Context context;
-    private Event[] events;
+    private ArrayList<Event> events;
 
     @Override
     public int getCount() {
-        return 0;
+
+        return events.size();
     }
 
     @Override
@@ -36,7 +38,7 @@ public class EventsListAdapter extends BaseAdapter{
         return 0;
     }
 
-    public EventsListAdapter(Context context, Event[] events){
+    public EventsListAdapter(Context context, ArrayList<Event> events){
 
         this.context = context;
         this.events = events;
@@ -44,30 +46,29 @@ public class EventsListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View grid;
+
+        Log.d("ZAQVKAAAA","GETVIEWWWWW");
+
         LayoutInflater inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null){
-            grid = new View(context);
-            grid = inflater.inflate(R.layout.view_events_layout,parent,false);
-
-            Event eventItem = events[0];
-            TextView title = (TextView)grid.findViewById(R.id.grid_title);
-            TextView sportType = (TextView)grid.findViewById(R.id.grid_sportType);
-            TextView city = (TextView)grid.findViewById(R.id.grid_city);
-
-            title.setText(eventItem.getTitle());
-            sportType.setText(eventItem.getSportType());
-            city.setText(eventItem.getCity());
-
-            Log.d("ZAQVKAAAA",eventItem.getTitle());
-        }
-        else{
-            grid = (View)convertView;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.view_events_layout, null);
         }
 
+        Event eventItem = events.get(position);
 
-        return grid;
+        TextView title = (TextView)convertView.findViewById(R.id.grid_title);
+        TextView sportType = (TextView)convertView.findViewById(R.id.grid_sportType);
+        TextView city = (TextView)convertView.findViewById(R.id.grid_city);
+
+        title.setText(eventItem.getTitle());
+        sportType.setText(eventItem.getSportType());
+        city.setText(eventItem.getCity());
+
+        Log.d("ZAQVKAAAA",eventItem.getTitle());
+
+        return convertView;
     }
+
 }

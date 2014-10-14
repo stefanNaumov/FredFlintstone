@@ -147,7 +147,6 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
                     event.setLatitude(eventLatitude);
                     event.setDate(eventDate);
                     event.setImage(eventImg);
-                    //EverliveApp app = new EverliveApp("Se1uyHp5A8LQJMr6");
 
                     Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
                     app.workWith().data(Event.class).create(event).executeAsync();

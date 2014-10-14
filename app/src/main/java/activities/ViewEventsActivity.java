@@ -1,6 +1,8 @@
 package activities;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
 import android.net.Uri;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
@@ -23,15 +26,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import fragments.EventDetailsFragment;
 import models.Event;
 import models.EventsListAdapter;
 import models.Everlive;
 import android.provider.ContactsContract.PhoneLookup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
 /**
  * Created by Stefan on 10/11/2014.
  */
-//TODO implement getting an array of Events from DB
-   // and make a custom ListView
+
 public class ViewEventsActivity extends Activity {
 
     EverliveApp app;
@@ -39,7 +46,9 @@ public class ViewEventsActivity extends Activity {
     GridView eventsGrid;
     EventsListAdapter adapter;
     ArrayList<Event> events;
-
+    FragmentManager fmanager;
+    FragmentTransaction ftrans;
+    EventDetailsFragment frag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,10 @@ public class ViewEventsActivity extends Activity {
 
         app = Everlive.getEverliveObj();
         eventsGrid = (GridView)findViewById(R.id.grid_events);
+        fmanager = getFragmentManager();
+
+
+
 
         app.workWith().data(Event.class).get().executeAsync(new RequestResultCallbackAction<ArrayList<Event>>() {
            @Override
@@ -65,6 +78,45 @@ public class ViewEventsActivity extends Activity {
            }
        });
  }
+    public void listBtnOnClick(View v){
+
+        ftrans = fmanager.beginTransaction();
+        frag = new EventDetailsFragment();
+
+
+        LinearLayout layout = (LinearLayout)v.getParent();
+        TextView uuidView = (TextView)layout.getChildAt(0);
+        String uuid = uuidView.getText().toString();
+        Event detailsEvent = getEventById(uuid);
+
+        Bundle eventDetails = new Bundle();
+        eventDetails.putString("Title",detailsEvent.getTitle());
+        eventDetails.putString("SportType",detailsEvent.getSportType());
+        eventDetails.putString("City",detailsEvent.getCity());
+        eventDetails.putString("Date",detailsEvent.getDate().toString());
+        eventDetails.putString("Content",detailsEvent.getContent());
+        eventDetails.putString("OrganizerName",detailsEvent.getOrganizerName());
+        eventDetails.putString("OrganizerPhone",detailsEvent.getOrganizerPhone());
+        eventDetails.putString("Longitude",detailsEvent.getLongitude());
+        eventDetails.putString("Latitude",detailsEvent.getLatitude());
+
+        frag.setArguments(eventDetails);
+
+        ftrans.add(R.id.event_list_layout,frag,"EventDetailsFrag");
+
+
+        ftrans.commit();
+
+    }
+
+    private Event getEventById(String uuid){
+        for (int i = 0; i < events.size(); i++){
+             if (events.get(i).getId().toString().equals(uuid)){
+                 return events.get(i);
+             }
+        }
+        return null;
+    }
 
     // return contact Display_Name if phone number passed as string already exist in database
     public String contactNameIfExists(Activity _activity, String number) {

@@ -7,6 +7,11 @@
 
 
     <TextView
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/grid_event_uuid"
+        android:visibility="invisible"/>
+    <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:textColor="#1014A1"
@@ -26,6 +31,14 @@
         android:textColor="#1014A1"
         android:textSize="20sp"
         android:id="@+id/grid_city" />
+    <Button
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/details"
+        android:layout_gravity="end"
+        android:id="@+id/eventDetails_btn"
+        android:onClick="listBtnOnClick"/>
 
     <ImageView
         android:layout_width="wrap_content"

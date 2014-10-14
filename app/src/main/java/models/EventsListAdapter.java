@@ -47,8 +47,6 @@ public class EventsListAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d("ZAQVKAAAA","GETVIEWWWWW");
-
         LayoutInflater inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -58,15 +56,15 @@ public class EventsListAdapter extends BaseAdapter{
 
         Event eventItem = events.get(position);
 
+        TextView uuid = (TextView)convertView.findViewById(R.id.grid_event_uuid);
         TextView title = (TextView)convertView.findViewById(R.id.grid_title);
         TextView sportType = (TextView)convertView.findViewById(R.id.grid_sportType);
         TextView city = (TextView)convertView.findViewById(R.id.grid_city);
 
+        uuid.setText(eventItem.getId().toString());
         title.setText(eventItem.getTitle());
         sportType.setText(eventItem.getSportType());
         city.setText(eventItem.getCity());
-
-        Log.d("ZAQVKAAAA",eventItem.getTitle());
 
         return convertView;
     }

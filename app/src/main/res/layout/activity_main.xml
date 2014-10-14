@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.sportseventsorganizer.MainActivity" 
     android:orientation="vertical"
-    android:background="@drawable/indians_fb"
-    android:id="@+id/">
+    android:background="@drawable/indians_fb">
 
 
     <Button

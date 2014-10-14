@@ -3,13 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/football_field"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:weightSum="1">
-
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView1"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/grid_title"/>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/grid_sportType"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/grid_city" />
 </LinearLayout>

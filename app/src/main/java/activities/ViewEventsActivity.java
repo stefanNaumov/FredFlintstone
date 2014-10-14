@@ -8,6 +8,7 @@ import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
 import android.net.Uri;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,8 +19,10 @@ import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import models.Event;
+import models.EventsListAdapter;
 import models.Everlive;
 import android.provider.ContactsContract.PhoneLookup;
 /**
@@ -31,34 +34,50 @@ public class ViewEventsActivity extends Activity {
 
     EverliveApp app;
     RequestResult<ArrayList<Event>> requestResult;
+    GridView eventsGrid;
+    EventsListAdapter adapter;
+    Event[] events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_events_layout);
+        setContentView(R.layout.events_listv_view);
 
-        //app = Everlive.getEverliveObj();
-        app = new EverliveApp("Se1uyHp5A8LQJMr6");
+        app = Everlive.getEverliveObj();
+        eventsGrid = (GridView)findViewById(R.id.grid_events);
+
        // requestResult = app.workWith().data(Event.class).getAll().executeSync();
-        new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                RequestResult res = app.workWith().data(Event.class)
-                        .getById("869c95b0-52b3-11e4-ade6-217b597a0541").executeSync();
+        Event ev = new Event();
+        ev.setTitle("Gosho");
+        Event[] evs = new Event[1];
+        evs[0] = ev;
+        adapter = new EventsListAdapter(this,evs);
+        eventsGrid.setAdapter(adapter);
 
-                if (res.getSuccess()){
-                    Event ev = (Event)res.getValue();
+//        new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                RequestResult res = app.workWith().data(Event.class)
+//                        .getById("869c95b0-52b3-11e4-ade6-217b597a0541").executeSync();
+//                Event ev;
+//                events = new Event[1];
+//                if (res.getSuccess()){
+//                    ev = (Event)res.getValue();
+//                    events[0] = ev;
+//
+//                }
+//                else{
+//                    System.out.println(res.getError().toString());
+//                }
+//
+//                Log.d("NAME", events[0].getTitle());
+//
+//            }
+//        }).start();
 
-                    System.out.println(ev.getTitle());
-                }
-                else{
-                    System.out.println(res.getError().toString());
-                }
-                Event e = ((Event) res.getValue());
-                Log.d("NAME",e.getTitle());
-            }
-        }).start();
+
 
 
         //for (Event event : requestResult.getValue()) {
@@ -89,17 +108,17 @@ public class ViewEventsActivity extends Activity {
 
     // Download image from Google Maps
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        String lat = "48.858235";
-        String lng = "2.294571";
-        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-                .execute(mapUrl);
-        return;
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        String lat = "48.858235";
+//        String lng = "2.294571";
+//        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
+//        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
+//                .execute(mapUrl);
+//        return;
+//    }
 
     //public void onClick(View v) {
     //    startActivity(new Intent(this, IndexActivity.class));

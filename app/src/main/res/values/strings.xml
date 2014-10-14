@@ -21,4 +21,6 @@
     <string name="date">Event Date</string>
     <string name="captureEvent">Capture Event Place</string>
     <string name="createEvent">Create Event</string>
+    <string name="title_activity_fav_events">Favorite Events</string>
+
 </resources>

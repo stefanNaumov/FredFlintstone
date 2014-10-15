@@ -101,20 +101,4 @@ public class EventDetailsFragment extends Fragment {
             bmImage.setImageBitmap(result);
         }
     }
-
-    final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
-        public void onLongPress(MotionEvent e) {
-
-            // something happens here:
-            String callString = "tel:" + originalPhoneNumber;
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse(callString));
-            startActivity(callIntent);
-        }
-    });
-
-    public boolean onTouchEvent(MotionEvent event) {
-        return gestureDetector.onTouchEvent(event);
-    };
-
 }

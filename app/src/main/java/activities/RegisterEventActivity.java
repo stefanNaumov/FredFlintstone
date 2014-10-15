@@ -275,35 +275,35 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-        String status = "";
+//        String status = "";
+//
+//        switch (i) {
+//            case android.location.LocationProvider.AVAILABLE:
+//                status = "avaliable";
+//                break;
+//            case android.location.LocationProvider.TEMPORARILY_UNAVAILABLE:
+//                status = "temporary unavaliable";
+//                break;
+//            case android.location.LocationProvider.OUT_OF_SERVICE:
+//                status = "out of service";
+//                break;
+//            default:
+//                break;
+//        }
 
-        switch (i) {
-            case android.location.LocationProvider.AVAILABLE:
-                status = "avaliable";
-                break;
-            case android.location.LocationProvider.TEMPORARILY_UNAVAILABLE:
-                status = "temporary unavaliable";
-                break;
-            case android.location.LocationProvider.OUT_OF_SERVICE:
-                status = "out of service";
-                break;
-            default:
-                break;
-        }
-
-        Toast.makeText(getBaseContext(), s + "status: " + status, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), s + "status: " + status, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProviderEnabled(String s) {
-        Toast.makeText(getBaseContext(),
-                "Provider " + "enabled",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(),
+                //"Provider " + "enabled",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProviderDisabled(String s) {
-        Toast.makeText(getBaseContext(),
-                "Provider " + "disabled",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(),
+                //"Provider " + "disabled",Toast.LENGTH_LONG).show();
     }
 
     public static class DatePickerFragment extends DialogFragment

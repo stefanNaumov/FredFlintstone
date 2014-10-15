@@ -10,7 +10,9 @@ import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
 import android.net.Uri;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.graphics.Bitmap;
@@ -49,6 +51,12 @@ public class ViewEventsActivity extends Activity {
     FragmentManager fmanager;
     FragmentTransaction ftrans;
     EventDetailsFragment frag;
+    View viewForButtonClickable;
+    Button clickableBtn;
+    LayoutInflater inflaterForBtnClickable;
+    LinearLayout layout;
+    TextView uuidView;
+    String uuid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +65,10 @@ public class ViewEventsActivity extends Activity {
         app = Everlive.getEverliveObj();
         eventsGrid = (GridView)findViewById(R.id.grid_events);
         fmanager = getFragmentManager();
+        inflaterForBtnClickable = getLayoutInflater();
 
-
+        viewForButtonClickable = inflaterForBtnClickable.inflate(R.layout.view_events_layout,null);
+        clickableBtn = (Button)viewForButtonClickable.findViewById(R.id.eventDetails_btn);
 
 
         app.workWith().data(Event.class).get().executeAsync(new RequestResultCallbackAction<ArrayList<Event>>() {
@@ -84,9 +94,9 @@ public class ViewEventsActivity extends Activity {
         frag = new EventDetailsFragment();
 
 
-        LinearLayout layout = (LinearLayout)v.getParent();
-        TextView uuidView = (TextView)layout.getChildAt(0);
-        String uuid = uuidView.getText().toString();
+        layout = (LinearLayout)v.getParent();
+        uuidView = (TextView)layout.getChildAt(0);
+        uuid = uuidView.getText().toString();
         Event detailsEvent = getEventById(uuid);
 
         Bundle eventDetails = new Bundle();
@@ -103,9 +113,11 @@ public class ViewEventsActivity extends Activity {
         frag.setArguments(eventDetails);
 
         ftrans.add(R.id.event_list_layout,frag,"EventDetailsFrag");
-
-
+        ftrans.addToBackStack(null);
         ftrans.commit();
+    }
+
+    public void addToDbBtnOnClick(){
 
     }
 
@@ -138,49 +150,15 @@ public class ViewEventsActivity extends Activity {
         }
     }
 
-    // Download image from Google Maps
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        String lat = "48.858235";
-        String lng = "2.294571";
-        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=200x200&sensor=false";
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView1))
-                .execute(mapUrl);
-        return;
-    }
 
     //public void onClick(View v) {
     //    startActivity(new Intent(this, IndexActivity.class));
     //    finish();
     //}
 
-    class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    ImageView bmImage;
 
-    public DownloadImageTask(ImageView bmImage) {
-        this.bmImage = bmImage;
-    }
 
-    protected Bitmap doInBackground(String... urls) {
-        String urldisplay = urls[0];
-        Bitmap mIcon11 = null;
-        try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-        return mIcon11;
-    }
-
-    protected void onPostExecute(Bitmap result) {
-        bmImage.setImageBitmap(result);
-    }
-}
 
 
 

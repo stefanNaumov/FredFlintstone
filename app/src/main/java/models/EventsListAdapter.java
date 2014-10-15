@@ -47,7 +47,7 @@ public class EventsListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("PALIM","PALIIIIIIIIIIIMMMMMMMMMMMM");
+
         LayoutInflater inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

@@ -52,6 +52,16 @@ public class EventDetailsFragment extends Fragment {
         content.setText(args.getString("Content"));
         orgName.setText(args.getString("OrganizerName"));
         orgPhone.setText(args.getString("OrganizerPhone"));
+        orgPhone.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String callString = "tel:" + originalPhoneNumber;
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse(callString));
+                startActivity(callIntent);
+                return true;
+            }
+        });
         return v;
     }
 

@@ -32,10 +32,14 @@ import fragments.EventDetailsFragment;
 import models.Event;
 import models.EventsListAdapter;
 import models.Everlive;
+import models.FavEvent;
+import sqlite.MySQLiteHelper;
+
 import android.provider.ContactsContract.PhoneLookup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Stefan on 10/11/2014.
@@ -57,6 +61,8 @@ public class ViewEventsActivity extends Activity {
     LinearLayout layout;
     TextView uuidView;
     String uuid;
+    MySQLiteHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +99,10 @@ public class ViewEventsActivity extends Activity {
         ftrans = fmanager.beginTransaction();
         frag = new EventDetailsFragment();
 
-
         layout = (LinearLayout)v.getParent();
         uuidView = (TextView)layout.getChildAt(0);
         uuid = uuidView.getText().toString();
+
         Event detailsEvent = getEventById(uuid);
 
         Bundle eventDetails = new Bundle();
@@ -117,8 +123,10 @@ public class ViewEventsActivity extends Activity {
         ftrans.commit();
     }
 
-    public void addToDbBtnOnClick(){
-
+    public void addToDbBtn(View v){
+        db = new MySQLiteHelper(ViewEventsActivity.this);
+        db.AddFavEvent(new FavEvent(uuid));
+        Toast.makeText(ViewEventsActivity.this,"Added to my favourites",Toast.LENGTH_LONG).show();
     }
 
     private Event getEventById(String uuid){

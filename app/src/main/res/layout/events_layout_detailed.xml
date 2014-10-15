@@ -10,50 +10,64 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="20sp"
-    android:layout_margin="5dp"
+    android:layout_margin="2dp"
     android:id="@+id/event_details_title"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_sportType"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_city"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_date"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_content"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_name"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:id="@+id/event_details_phone"
         android:clickable="true"/>
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/imageView1"
-        android:layout_gravity="end"
-        android:alpha="1"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addToFav"
+            android:id="@+id/addToFav_btn"
+            android:onClick="addToDbBtn" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView1"/>
+
+        </LinearLayout>
+
+
 </LinearLayout>

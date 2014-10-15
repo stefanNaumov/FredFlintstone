@@ -27,7 +27,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/makeEvent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_shape"
             android:shadowColor="#6634A8"
             android:shadowDx="0"

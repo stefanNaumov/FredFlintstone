@@ -13,7 +13,7 @@
     <string name="viewEvents">View Events</string>
     <string name="makeEvent">Make New Event</string>
     <string name="phoneNumber">Phone Number</string>
-    <string name="eventDataSeparator">Event Data</string>
+    <string name="eventDataSeparator">EVENT DATA</string>
     <string name="title">Event Title</string>
     <string name="sportType">Sport Type</string>
     <string name="content">Event Content</string>

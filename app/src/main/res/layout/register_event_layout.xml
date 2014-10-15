@@ -12,53 +12,53 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Username"
+            android:text="@string/username"
             android:id="@+id/userNameInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="@string/phoneNumber"
             android:id="@+id/userPhoneInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:text="@string/eventDataSeparator"
             android:id="@+id/eventDataTextView"
             android:gravity="center"
-            android:textColor="#FFB34F"
-            android:textSize="18sp"/>
+            android:textColor="@color/color_olive_gray"
+            android:textSize="20sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="@string/title"
             android:id="@+id/eventTitleInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="@string/sportType"
             android:id="@+id/eventSportTypeInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="@string/content"
             android:id="@+id/eventContentInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:text="@string/city"
             android:id="@+id/eventCityInput"
-            android:textColor="#1014A1"
-            android:textSize="20sp"/>
+            android:textColor="@color/text_color_orange"
+            android:textSize="25sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,15 +74,15 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:textColor="#FFB34F"
-                android:textSize="20sp"
+                android:textColor="@color/text_color_orange"
+                android:textSize="25sp"
                 android:alpha="0.70"/>
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:gravity="end"
                 android:id="@+id/eventDateCalendarView"
-                android:textColor="#FFB34F"/>
+                android:textColor="@color/text_color_orange"/>
 
         </LinearLayout>
 
@@ -97,7 +97,7 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
-            android:textColor="#FFB34F"
+            android:textColor="@color/text_color_orange"
             android:textSize="20sp"
             android:alpha="0.70"/>
 
@@ -112,7 +112,7 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
-            android:textColor="#FFB34F"
+            android:textColor="@color/text_color_orange"
             android:textSize="30sp"
             android:alpha="0.70"/>
 

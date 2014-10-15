@@ -2,42 +2,85 @@ package activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.stefan.sportseventsorganizer.R;
+import com.telerik.everlive.sdk.core.EverliveApp;
+import com.telerik.everlive.sdk.core.result.RequestResult;
+import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
+
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
+import android.widget.GridView;
 
 import models.Event;
+import models.EventsListAdapter;
+import models.Everlive;
 import models.FavEvent;
+import models.FavEventsListAdapter;
 import sqlite.MySQLiteHelper;
 
 public class FavEventsActivity extends Activity {
 
+    MySQLiteHelper db;
+    List<FavEvent> myEventsList;
+    FavEventsListAdapter adapter;
+    GridView favEventsGrid;
+    EverliveApp app;
+    List<Event> allEvents;
+    List<Event> myEvents;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fav_events);
 
-        MySQLiteHelper db = new MySQLiteHelper(this);
 
-        /**
-         * CRUD Operations
-         * */
-        // add FavEvents
-        db.AddFavEvent(new FavEvent("everliteIndex1"));
-        db.AddFavEvent(new FavEvent("everliteIndex2"));
-        db.AddFavEvent(new FavEvent("everliteIndex3"));
+        app = Everlive.getEverliveObj();
+        app.workWith().data(Event.class).get().executeAsync(new RequestResultCallbackAction<ArrayList<Event>>() {
+            @Override
+            public void invoke(final RequestResult<ArrayList<Event>> requestResult) {
 
-        // get all books
-        List<FavEvent> list = db.getAllFavEvents();
+                if (requestResult.getSuccess()){
+                    allEvents = requestResult.getValue();
+                    db = new MySQLiteHelper(FavEventsActivity.this);
+                    myEventsList = db.getAllFavEvents();
+                    myEvents = getMyEvents();
+                    adapter = new FavEventsListAdapter(FavEventsActivity.this,myEvents);
 
-        // delete one book
-        db.deleteFavEvent(list.get(0));
+                    favEventsGrid = (GridView)findViewById(R.id.grid_fav_events);
 
-        // get all books
-        db.getAllFavEvents();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            favEventsGrid.setAdapter(adapter);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private List<Event> getMyEvents(){
+        List<Event> myList = new ArrayList<Event>();
+
+        for (int i = 0; i < myEventsList.size(); i++){
+
+            FavEvent currFavEvent = myEventsList.get(i);
+
+            for (int j = 0; j < allEvents.size(); j++){
+               if (currFavEvent.getEverliteIndex().equals(allEvents.get(j).getId().toString())){
+                   myList.add(allEvents.get(j));
+                   break;
+               }
+            }
+        }
+
+        return myList;
     }
 }

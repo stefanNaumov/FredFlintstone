@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/events_list_layout_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ACAC83"
+    android:layout_margin="30dp"
+    android:alpha="0.6">
+
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/grid_event_uuid"
+        android:visibility="invisible"/>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:textColor="#1014A1"
+        android:textSize="20sp"
+        android:id="@+id/grid_title"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:textColor="#1014A1"
+        android:textSize="20sp"
+        android:id="@+id/grid_sportType"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:textColor="#1014A1"
+        android:textSize="20sp"
+        android:id="@+id/grid_city" />
+
+</LinearLayout>

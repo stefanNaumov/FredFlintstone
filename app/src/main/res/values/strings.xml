@@ -25,4 +25,5 @@
     <string name="details">Details</string>
     <string name="name">Name</string>
     <string name="addToFav">Add To Favourites</string>
+    <string name="getMyEvents">My Events</string>
 </resources>

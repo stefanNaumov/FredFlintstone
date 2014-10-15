@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/football_field"
+    android:background="@drawable/basketball_cort"
     android:id="@+id/event_list_layout">
 
     <GridView
@@ -14,6 +14,7 @@
         android:numColumns="2"
         android:divider="#FFCC00"
         android:dividerHeight="2dp"
+        android:layout_margin="10dp"
         android:horizontalSpacing="20dp"
         android:verticalSpacing="20dp">
 

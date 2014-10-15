@@ -3,6 +3,7 @@ package sqlite;
 /**
  * Created by Rusekov on 14/10/2014.
  */
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,7 +109,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     // Get All FavEvents
     public List<FavEvent> getAllFavEvents() {
-        List<FavEvent> favEvents = new LinkedList<FavEvent>();
+        List<FavEvent> favEvents = new ArrayList<FavEvent>();
 
         // 1. build the query
         String query = "SELECT  * FROM " + TABLE_FAVEVENTS;

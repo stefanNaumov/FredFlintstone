@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Stefan on 10/13/2014.
  */
-public class EventsListAdapter extends BaseAdapter{
+public class FavEventsListAdapter extends BaseAdapter{
 
     private Context context;
     private List<Event> events;
@@ -39,7 +39,7 @@ public class EventsListAdapter extends BaseAdapter{
         return 0;
     }
 
-    public EventsListAdapter(Context context, List<Event> events){
+    public FavEventsListAdapter(Context context, List<Event> events){
 
         this.context = context;
         this.events = events;
@@ -47,12 +47,12 @@ public class EventsListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("PALIM","PALIIIIIIIIIIIMMMMMMMMMMMM");
+
         LayoutInflater inflater = (LayoutInflater)context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.view_events_layout, null);
+            convertView = inflater.inflate(R.layout.activity_fav_layout, null);
         }
 
         Event eventItem = events.get(position);

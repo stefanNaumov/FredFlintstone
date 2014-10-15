@@ -8,13 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import activities.FavEventsActivity;
 import activities.RegisterEventActivity;
 import activities.ViewEventsActivity;
 
 
 public class MyActivity extends Activity implements View.OnClickListener{
 
-    Button viewEventsBtn, regEventBtn;
+    Button viewEventsBtn, regEventBtn,getMyEventsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +23,11 @@ public class MyActivity extends Activity implements View.OnClickListener{
 
         viewEventsBtn = (Button)findViewById(R.id.viewEvents_btn);
         regEventBtn = (Button)findViewById(R.id.makeEvent_btn);
+        getMyEventsBtn = (Button)findViewById(R.id.getMyEvents_btn);
 
         viewEventsBtn.setOnClickListener(this);
         regEventBtn.setOnClickListener(this);
+        getMyEventsBtn.setOnClickListener(this);
     }
 
 
@@ -56,6 +59,10 @@ public class MyActivity extends Activity implements View.OnClickListener{
         }
         else if (view.getId() == regEventBtn.getId()){
             Intent i = new Intent(this, RegisterEventActivity.class);
+            startActivity(i);
+        }
+        else if (view.getId() == getMyEventsBtn.getId()){
+            Intent i = new Intent(this, FavEventsActivity.class);
             startActivity(i);
         }
     }

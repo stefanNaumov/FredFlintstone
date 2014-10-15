@@ -1,14 +1,20 @@
 package fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.gesture.Gesture;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebStorage;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,11 +27,15 @@ import java.io.InputStream;
  */
 public class EventDetailsFragment extends Fragment {
     TextView title,sportType,city,date,content,orgName,orgPhone,longitude,latitude;
+    String originalPhoneNumber;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.events_layout_detailed, container,false);
         Bundle args = getArguments();
+
+        originalPhoneNumber = args.getString("OriginalOrganizerPhone");
 
         title = (TextView)v.findViewById(R.id.event_details_title);
         sportType = (TextView)v.findViewById(R.id.event_details_sportType);
@@ -51,8 +61,6 @@ public class EventDetailsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        String lat = "48.858235";
-        String lng = "2.294571";
         String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=200x200&sensor=false";
         new DownloadImageTask((ImageView) getView().findViewById(R.id.imageView1))
                 .execute(mapUrl);
@@ -83,4 +91,20 @@ public class EventDetailsFragment extends Fragment {
             bmImage.setImageBitmap(result);
         }
     }
+
+    final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        public void onLongPress(MotionEvent e) {
+
+            // something happens here:
+            String callString = "tel:" + originalPhoneNumber;
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse(callString));
+            startActivity(callIntent);
+        }
+    });
+
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    };
+
 }

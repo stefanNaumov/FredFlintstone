@@ -112,9 +112,11 @@ public class ViewEventsActivity extends Activity {
         eventDetails.putString("Date",detailsEvent.getDate().toString());
         eventDetails.putString("Content",detailsEvent.getContent());
         eventDetails.putString("OrganizerName",detailsEvent.getOrganizerName());
-        eventDetails.putString("OrganizerPhone",detailsEvent.getOrganizerPhone());
+        eventDetails.putString("OrganizerPhone",this.contactNameIfExists(this,detailsEvent.getOrganizerPhone()));
         eventDetails.putString("Longitude",detailsEvent.getLongitude());
         eventDetails.putString("Latitude",detailsEvent.getLatitude());
+        eventDetails.putString("OriginalOrganizerPhone",detailsEvent.getOrganizerPhone());
+
 
         frag.setArguments(eventDetails);
 

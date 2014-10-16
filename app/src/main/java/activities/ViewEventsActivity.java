@@ -3,9 +3,11 @@ package activities;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
@@ -94,6 +96,9 @@ public class ViewEventsActivity extends Activity {
            }
        });
  }
+
+
+
     public void listBtnOnClick(View v){
 
         ftrans = fmanager.beginTransaction();
@@ -122,6 +127,7 @@ public class ViewEventsActivity extends Activity {
 
         ftrans.add(R.id.event_list_layout,frag,"EventDetailsFrag");
         ftrans.addToBackStack(null);
+
         ftrans.commit();
     }
 

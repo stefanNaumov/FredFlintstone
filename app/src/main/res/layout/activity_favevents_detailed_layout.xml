@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_fav_detailed_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ACAC83"
+    android:layout_weight="1"
+    >
+
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/myfav_event_uuid"
+        android:visibility="invisible"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_sportType"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_city" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_organizerName" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_olive_gray"
+        android:textSize="20sp"
+        android:layout_margin="20dp"
+        android:id="@+id/myfav_event_organizerPhone" />
+
+</LinearLayout>

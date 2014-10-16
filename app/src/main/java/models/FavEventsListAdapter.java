@@ -57,10 +57,10 @@ public class FavEventsListAdapter extends BaseAdapter{
 
         Event eventItem = events.get(position);
 
-        TextView uuid = (TextView)convertView.findViewById(R.id.grid_event_uuid);
-        TextView title = (TextView)convertView.findViewById(R.id.grid_title);
-        TextView sportType = (TextView)convertView.findViewById(R.id.grid_sportType);
-        TextView city = (TextView)convertView.findViewById(R.id.grid_city);
+        TextView uuid = (TextView)convertView.findViewById(R.id.myfav_event_uuid);
+        TextView title = (TextView)convertView.findViewById(R.id.myfav_event_title);
+        TextView sportType = (TextView)convertView.findViewById(R.id.myfav_event_sportType);
+        TextView city = (TextView)convertView.findViewById(R.id.myfav_event_city);
 
         uuid.setText(eventItem.getId().toString());
         title.setText(eventItem.getTitle());

@@ -115,6 +115,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
         alert = new AlertDialog.Builder(this);
         alert.setMessage("You must switch your GPS on in order to register a new event!");
+        alert.setPositiveButton("OK",null);
         alert.show();
     }
 
@@ -176,21 +177,6 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         }
     }
 
-    private String getRealPathFromURI(Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
     public Location getLastKnownLocation() {
         List<String> providers = locationManager.getProviders(false);
         Location bestLocation = null;
@@ -212,58 +198,6 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         return bestLocation;
     }
 
-    private boolean inputValidator(){
-        boolean areFieldsValid = false;
-        name = organizerName.getText().toString().trim();
-        phone = organizerPhone.getText().toString().trim();
-        title = eventTitle.getText().toString().trim();
-        sportType = eventSportType.getText().toString().trim();
-        content = eventContent.getText().toString().trim();
-        city = eventCity.getText().toString().trim();
-
-        DateFormat formatter ;
-
-        if (name == null || name.isEmpty() || name == "" || name.matches("Username")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid userName", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (phone == null || phone.isEmpty() || phone == "" || phone.matches("Phone Number")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid phone", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (title == null || title.isEmpty() || title == "" || title.matches("Event Title")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid event title", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (sportType == null || sportType.isEmpty() || sportType == "" || sportType.matches("Sport Type")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid sport type", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (content == null || content.isEmpty() || content == "" || content.matches("Event Content")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid content", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        if (city == null || city.isEmpty() || city == "" || city.matches("Event City")){
-
-            Toast.makeText(RegisterEventActivity.this,"Enter valid city", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        formatter = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            eventDate = (Date)formatter.parse(calendarView.getText().toString());
-            Log.d("DATE",eventDate.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void onLocationChanged(Location location) {
 
@@ -276,7 +210,6 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
             eventLatitude = String.valueOf(currLocation.getLatitude());
             isLocationFound = true;
         }
-
     }
 
     @Override
@@ -333,4 +266,72 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
                     + String.valueOf(month + 1) + "-" + String.valueOf(year));
         }
     }
+
+    private String getRealPathFromURI(Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    private boolean inputValidator(){
+        boolean areFieldsValid = false;
+        name = organizerName.getText().toString().trim();
+        phone = organizerPhone.getText().toString().trim();
+        title = eventTitle.getText().toString().trim();
+        sportType = eventSportType.getText().toString().trim();
+        content = eventContent.getText().toString().trim();
+        city = eventCity.getText().toString().trim();
+
+        DateFormat formatter ;
+
+        if (name == null || name.isEmpty() || name == "" || name.matches("Username")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid userName", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (phone == null || phone.isEmpty() || phone == "" || phone.matches("Phone Number")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid phone", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (title == null || title.isEmpty() || title == "" || title.matches("Event Title")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid event title", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (sportType == null || sportType.isEmpty() || sportType == "" || sportType.matches("Sport Type")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid sport type", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (content == null || content.isEmpty() || content == "" || content.matches("Event Content")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid content", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (city == null || city.isEmpty() || city == "" || city.matches("Event City")){
+
+            Toast.makeText(RegisterEventActivity.this,"Enter valid city", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            eventDate = (Date)formatter.parse(calendarView.getText().toString());
+            Log.d("DATE",eventDate.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
+

@@ -1,8 +1,9 @@
 <resources>
 
-    <color name="text_color_orange">#E65C00</color>
+    <color name="text_color_orange">#D48122</color>
     <color name="color_black">#000000</color>
     <color name="color_olive_gray">#272722</color>
+    <color name="color_metallic_blue">#5F869E</color>
 
 
     <!-- Base application theme. -->

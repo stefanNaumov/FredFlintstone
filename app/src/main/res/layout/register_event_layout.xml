@@ -2,7 +2,7 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/icon_ball">
+    android:background="@drawable/football_field">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,16 +12,18 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/username"
+            android:hint="@string/username"
             android:id="@+id/userNameInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/phoneNumber"
+            android:hint="@string/phoneNumber"
             android:id="@+id/userPhoneInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
         <TextView
             android:layout_width="fill_parent"
@@ -29,35 +31,40 @@
             android:text="@string/eventDataSeparator"
             android:id="@+id/eventDataTextView"
             android:gravity="center"
-            android:textColor="@color/color_olive_gray"
+            android:textColorHint="@color/color_black"
+            android:textStyle="bold"
             android:textSize="20sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/title"
+            android:hint="@string/title"
             android:id="@+id/eventTitleInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/sportType"
+            android:hint="@string/sportType"
             android:id="@+id/eventSportTypeInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/content"
+            android:hint="@string/content"
             android:id="@+id/eventContentInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/city"
+            android:hint="@string/city"
             android:id="@+id/eventCityInput"
-            android:textColor="@color/text_color_orange"
+            android:textColorHint="@color/text_color_orange"
+            android:textStyle="bold"
             android:textSize="25sp"/>
 
         <LinearLayout

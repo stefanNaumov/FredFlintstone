@@ -1,6 +1,7 @@
 package activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -67,6 +68,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     Button cameraStartBtn;
     Button registerEventBtn;
     Button eventDateBtn;
+    AlertDialog.Builder alert;
 
     static TextView calendarView;
     EditText organizerName, organizerPhone,eventTitle,eventSportType,eventContent,
@@ -110,6 +112,10 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         cameraStartBtn.setOnClickListener(this);
         registerEventBtn.setOnClickListener(this);
         eventDateBtn.setOnClickListener(this);
+
+        alert = new AlertDialog.Builder(this);
+        alert.setMessage("You must switch your GPS on in order to register a new event!");
+        alert.show();
     }
 
     @Override
@@ -161,11 +167,11 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK){
             Uri selectedImageUri  = data.getData();
-            //String imgPath = getRealPathFromURI(selectedImageUri);
+            String imgPath = getRealPathFromURI(selectedImageUri);
 
-           // Toast.makeText(this, imgPath, Toast.LENGTH_SHORT).show();
-            //Drawable drawable = Drawable.createFromPath(imgPath);
-            //eventImg   = ((BitmapDrawable) drawable).getBitmap();
+            Toast.makeText(this, imgPath, Toast.LENGTH_SHORT).show();
+            Drawable drawable = Drawable.createFromPath(imgPath);
+            eventImg = ((BitmapDrawable) drawable).getBitmap();
 
         }
     }

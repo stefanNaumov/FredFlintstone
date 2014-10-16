@@ -60,7 +60,16 @@
             android:layout_height="wrap_content"
             android:text="@string/addToFav"
             android:id="@+id/addToFav_btn"
-            android:onClick="addToDbBtn" />
+            android:onClick="addToDbBtn"
+            android:layout_gravity="end"
+            android:background="@drawable/button_shape"
+            android:shadowColor="#6634A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:textColor="#FFB34F"
+            android:textSize="30sp"
+            android:alpha="0.70"/>
 
         <ImageView
             android:layout_width="fill_parent"

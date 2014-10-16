@@ -17,21 +17,21 @@
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_title"/>
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_sportType"/>
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_city" />
 

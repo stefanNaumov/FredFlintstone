@@ -17,21 +17,21 @@
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_title"/>
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_sportType"/>
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:textColor="#1014A1"
+        android:textColor="@color/color_olive_gray"
         android:textSize="20sp"
         android:id="@+id/grid_city" />
     <Button
@@ -40,6 +40,14 @@
         android:text="@string/details"
         android:layout_gravity="end"
         android:id="@+id/eventDetails_btn"
-        android:onClick="listBtnOnClick"/>
+        android:onClick="listBtnOnClick"
+        android:background="@drawable/button_shape"
+        android:shadowColor="#6634A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#FFB34F"
+        android:textSize="30sp"
+        android:alpha="0.70"/>
 
 </LinearLayout>

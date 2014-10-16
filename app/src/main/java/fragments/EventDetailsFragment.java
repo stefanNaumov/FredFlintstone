@@ -18,6 +18,8 @@ import android.webkit.WebStorage;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+
 import com.example.stefan.sportseventsorganizer.R;
 
 import java.io.InputStream;
@@ -78,7 +80,7 @@ public class EventDetailsFragment extends Fragment {
     }
 
     class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
+        ImageView bmImage = (ImageView)getView().findViewById(R.id.imageView1);
 
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;

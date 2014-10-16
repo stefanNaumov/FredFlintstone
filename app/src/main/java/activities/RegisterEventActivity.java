@@ -21,10 +21,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,10 +116,13 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
         registerEventBtn.setOnClickListener(this);
         eventDateBtn.setOnClickListener(this);
 
-        alert = new AlertDialog.Builder(this);
-        alert.setMessage("You must switch your GPS on in order to register a new event!");
-        alert.setPositiveButton("OK",null);
-        alert.show();
+        CharSequence message = "You must switch your GPS on in order to register a new event!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+        toast.show();
     }
 
     @Override
@@ -173,6 +179,9 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
             Toast.makeText(this, imgPath, Toast.LENGTH_SHORT).show();
             Drawable drawable = Drawable.createFromPath(imgPath);
             eventImg = ((BitmapDrawable) drawable).getBitmap();
+
+            ScrollView rl = (ScrollView)findViewById(R.id.ScrollID);
+            rl.setBackground(drawable);
 
         }
     }

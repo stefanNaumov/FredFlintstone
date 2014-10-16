@@ -161,9 +161,12 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
                     event.setDate(eventDate);
                     event.setImage(eventImg);
 
-                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+                    toast.show();
                     app.workWith().data(Event.class).create(event).executeAsync();
-                    Toast.makeText(this,"Added TO DATABASE",Toast.LENGTH_LONG).show();
+
                 }
             }
         }
@@ -292,6 +295,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
     }
 
     private boolean inputValidator(){
+        Toast toast;
         boolean areFieldsValid = false;
         name = organizerName.getText().toString().trim();
         phone = organizerPhone.getText().toString().trim();
@@ -304,32 +308,50 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
 
         if (name == null || name.isEmpty() || name == "" || name.matches("Username")){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid userName", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid userName", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
-        if (phone == null || phone.isEmpty() || phone == "" || (!(phone.matches("^(08)([0-9]{7})|([+]3598)[0-9]{7}$")))){
+        if (phone == null || phone.isEmpty() || phone == "" || (!(phone.matches("^(08)([0-9]{8})|([+]3598)[0-9]{8}$")))){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid phone", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid phone", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
         if (title == null || title.isEmpty() || title == "" || title.matches("Event Title")){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid event title", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid event title", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
         if (sportType == null || sportType.isEmpty() || sportType == "" || sportType.matches("Sport Type")){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid sport type", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid sport type", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
         if (content == null || content.isEmpty() || content == "" || content.matches("Event Content")){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid content", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid content", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
         if (city == null || city.isEmpty() || city == "" || city.matches("Event City")){
 
-            Toast.makeText(RegisterEventActivity.this,"Enter valid city", Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(RegisterEventActivity.this,"Enter valid city", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+            toast.show();
             return false;
         }
         formatter = new SimpleDateFormat("dd-MM-yyyy");

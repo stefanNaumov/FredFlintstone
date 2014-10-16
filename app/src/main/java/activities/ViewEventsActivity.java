@@ -12,6 +12,7 @@ import android.util.Log;
 import android.provider.ContactsContract.PhoneLookup;
 import android.database.Cursor;
 import android.net.Uri;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -133,9 +134,13 @@ public class ViewEventsActivity extends Activity {
     }
 
     public void addToDbBtn(View v){
+
         db = new MySQLiteHelper(ViewEventsActivity.this);
         db.AddFavEvent(new FavEvent(uuid));
-        Toast.makeText(ViewEventsActivity.this,"Added to my favourites",Toast.LENGTH_LONG).show();
+        Toast toast = Toast.makeText(ViewEventsActivity.this, "Added to my favourites", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER|Gravity.LEFT, 0, 0);
+
+        toast.show();
     }
 
     private Event getEventById(String uuid){

@@ -71,6 +71,7 @@ public class ViewEventsActivity extends Activity {
         setContentView(R.layout.events_listv_view);
 
         app = Everlive.getEverliveObj();
+
         eventsGrid = (GridView)findViewById(R.id.grid_events);
         fmanager = getFragmentManager();
         inflaterForBtnClickable = getLayoutInflater();

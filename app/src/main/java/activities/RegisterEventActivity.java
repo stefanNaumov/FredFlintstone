@@ -298,7 +298,7 @@ public class RegisterEventActivity extends Activity implements View.OnClickListe
             Toast.makeText(RegisterEventActivity.this,"Enter valid userName", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (phone == null || phone.isEmpty() || phone == "" || phone.matches("Phone Number")){
+        if (phone == null || phone.isEmpty() || phone == "" || (!(phone.matches("^(08)([0-9]{7})|([+]3598)[0-9]{7}$")))){
 
             Toast.makeText(RegisterEventActivity.this,"Enter valid phone", Toast.LENGTH_LONG).show();
             return false;

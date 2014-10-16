@@ -4,6 +4,7 @@
     <color name="color_black">#000000</color>
     <color name="color_olive_gray">#272722</color>
 
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
 

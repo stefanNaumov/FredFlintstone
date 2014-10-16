@@ -28,7 +28,8 @@ import java.io.InputStream;
  * Created by Stefan on 10/14/2014.
  */
 public class EventDetailsFragment extends Fragment {
-    TextView title,sportType,city,date,content,orgName,orgPhone,longitude,latitude;
+    TextView title,sportType,city,date,content,orgName,orgPhone;
+    String longitude,latitude;
     String originalPhoneNumber;
 
     @Override
@@ -47,6 +48,7 @@ public class EventDetailsFragment extends Fragment {
         orgName = (TextView)v.findViewById(R.id.event_details_name);
         orgPhone = (TextView)v.findViewById(R.id.event_details_phone);
 
+
         title.setText(args.getString("Title"));
         sportType.setText(args.getString("SportType"));
         city.setText(args.getString("City"));
@@ -54,6 +56,9 @@ public class EventDetailsFragment extends Fragment {
         content.setText(args.getString("Content"));
         orgName.setText(args.getString("OrganizerName"));
         orgPhone.setText(args.getString("OrganizerPhone"));
+        longitude = args.getString("Longitude");
+        latitude = args.getString("Latitude");
+
         orgPhone.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -72,8 +77,10 @@ public class EventDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=15&size=200x200&sensor=false";
+        Log.d("LATITUDE",latitude.toString());
+        Log.d("LONGITUDE",longitude.toString());
+        String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latitude + "," + longitude +
+                "&zoom=18&size=680x400&markers=size:mid%7color:blue%7Clabel:S%7C" + latitude + "," + longitude;
         new DownloadImageTask((ImageView) getView().findViewById(R.id.imageView1))
                 .execute(mapUrl);
         return;

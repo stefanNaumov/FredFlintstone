@@ -45,6 +45,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:layout_margin="@dimen/event_details_margin"
+        android:id="@+id/event_details_phone_label"
+        android:text="LONG PRESS ON NUMBER TO CALL"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_margin="@dimen/event_details_margin"
         android:id="@+id/event_details_phone"

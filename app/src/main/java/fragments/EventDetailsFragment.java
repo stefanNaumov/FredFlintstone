@@ -1,6 +1,7 @@
 package fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.gesture.Gesture;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -17,12 +19,14 @@ import android.view.ViewGroup;
 import android.webkit.WebStorage;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import com.example.stefan.sportseventsorganizer.R;
 
 import java.io.InputStream;
+
+import activities.ViewEventsActivity;
 
 /**
  * Created by Stefan on 10/14/2014.
@@ -31,12 +35,15 @@ public class EventDetailsFragment extends Fragment {
     TextView title,sportType,city,date,content,orgName,orgPhone;
     String longitude,latitude;
     String originalPhoneNumber;
+    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.events_layout_detailed, container,false);
         Bundle args = getArguments();
+
+        context = container.getContext();
 
         originalPhoneNumber = args.getString("OriginalOrganizerPhone");
 
@@ -62,10 +69,16 @@ public class EventDetailsFragment extends Fragment {
         orgPhone.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                String callString = "tel:" + originalPhoneNumber;
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse(callString));
-                startActivity(callIntent);
+                if (SlowConnection()) {
+                    InformForSlowConnection();
+                }
+                else {
+
+                    String callString = "tel:" + originalPhoneNumber;
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse(callString));
+                    startActivity(callIntent);
+                }
                 return true;
             }
         });
@@ -109,5 +122,30 @@ public class EventDetailsFragment extends Fragment {
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }
+    }
+
+    public boolean SlowConnection() {
+
+        TelephonyManager myTelephonyManager = (TelephonyManager)
+                this.context.getSystemService(Context.TELEPHONY_SERVICE);
+        int networkType = myTelephonyManager.getNetworkType();
+        switch (networkType) {
+            case TelephonyManager.NETWORK_TYPE_GPRS:
+            case TelephonyManager.NETWORK_TYPE_EDGE:
+            case TelephonyManager.NETWORK_TYPE_CDMA:
+            case TelephonyManager.NETWORK_TYPE_1xRTT:
+            case TelephonyManager.NETWORK_TYPE_IDEN:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public void InformForSlowConnection(){
+        CharSequence text = "This App needs Internet Connection. The call can not be made in 2G";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(this.context, text, duration);
+        toast.show();
     }
 }

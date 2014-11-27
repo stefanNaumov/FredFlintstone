@@ -15,24 +15,15 @@
         android:id="@+id/grid_event_uuid"
         android:visibility="invisible"/>
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/grid_title"/>
 
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/grid_sportType"/>
 
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/grid_city" />
     <Button
         android:onClick="listBtnOnClick"
@@ -41,13 +32,6 @@
         android:text="@string/details"
         android:layout_gravity="end"
         android:id="@+id/eventDetails_btn"
-        android:background="@drawable/button_shape"
-        android:shadowColor="#6634A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:textColor="#FFB34F"
-        android:textSize="30sp"
-        android:alpha="0.70"/>
+        style="@style/mainActivityBtnStyle"/>
 
 </LinearLayout>

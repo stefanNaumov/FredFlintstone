@@ -16,24 +16,15 @@
         android:id="@+id/myfav_event_uuid"
         android:visibility="invisible"/>
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/myfav_event_title"/>
 
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/myfav_event_sportType"/>
 
     <TextView
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:textColor="@color/color_olive_gray"
-        android:textSize="20sp"
+        style="@style/eventsTextViewStyle"
         android:id="@+id/myfav_event_city" />
 
 
